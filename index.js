@@ -1,16 +1,11 @@
 // app.js
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
-const taskRoutes = require('./src/api/routes/taskRoutes');
-
+const taskRoutes = require('./api/routes/taskRoutes');
+const database = require('./config/database')
 app.use(express.json());
 
-// Connect to the database (from src/config/database.js)
-mongoose.connect('mongodb://localhost/myappdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+database.databaseConnect();
 
 // Load routes
 app.use('/api', taskRoutes);
